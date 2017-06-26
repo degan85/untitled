@@ -71,9 +71,9 @@ function frame() {
         frame_left_move();
     }else if('right'=== str||'오른쪽'==str){
         frame_right_move();
-    }else if('up'==str||'위'==str) {
+    }else if('up'==str||'위쪽'==str) {
         frame_up_move();
-    }else if('down'==str||'아래'==str) {
+    }else if('down'==str||'아래쪽'==str) {
         frame_down_move();
     }
 
@@ -121,7 +121,7 @@ function frame_up_move() {
         clearInterval(id);
     }else {
         pos_y--;
-        elem.style.top = (pos_y-72) + 'px';
+        elem.style.top = (pos_y) + 'px';
     }
 }
 
@@ -137,6 +137,6 @@ function frame_down_move() {
         clearInterval(id);
     }else {
         pos_y++;
-        elem.style.top = (pos_y-72) + 'px';
+        elem.style.top = (pos_y) + 'px';
     }
 }
