@@ -26,6 +26,7 @@ $(document).ready(function(){
 
         time=0;
         val = $('#input1').val();
+        val = val.replace(/[\r|\n]/g,"");
         vals = val.split(';');
 
         set_time(time);
@@ -59,20 +60,20 @@ function set_values(va) {
     str = va.replace(/[0-9]/g,"");
     // alert('num : '+num+', str : '+str);
     if(str === 'left') {
-        pos_x = pos_x - 8;
+        // pos_x = pos_x - 8;
     }
     frame();
 }
 
 function frame() {
 
-    if('left'=== str) {
+    if('left'=== str||'왼쪽'==str) {
         frame_left_move();
-    }else if('right'=== str){
+    }else if('right'=== str||'오른쪽'==str){
         frame_right_move();
-    }else if('up'==str) {
+    }else if('up'==str||'위'==str) {
         frame_up_move();
-    }else if('down'==str) {
+    }else if('down'==str||'아래'==str) {
         frame_down_move();
     }
 
@@ -120,7 +121,7 @@ function frame_up_move() {
         clearInterval(id);
     }else {
         pos_y--;
-        elem.style.top = (pos_y-94) + 'px';
+        elem.style.top = (pos_y-72) + 'px';
     }
 }
 
@@ -136,6 +137,6 @@ function frame_down_move() {
         clearInterval(id);
     }else {
         pos_y++;
-        elem.style.top = (pos_y-94) + 'px';
+        elem.style.top = (pos_y-72) + 'px';
     }
 }
