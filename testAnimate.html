@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>test jquery animate</title>
+    <style>
+        #container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background: yellow;
+        }
+        #animate1 {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: red;
+        }
+        #animate2 {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 120px;
+            left: 120px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <!--<div class="col-sm-1"></div>-->
+    <div class="col-sm-6">
+        <div id ="container">
+            <div id ="animate1"></div>
+            <div id ="animate2"></div>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <h2>사각형 움직이기(animate)</h2>
+        <p>왼쪽, 오른쪽, 위쪽, 아래쪽를 입력하세요.</p>
+        <form>
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea id="input1" class="form-control has-success" rows="10" id="comment" placeholder="left 60;"></textarea>
+            </div>
+        </form>
+
+        <p>
+            <button type="button" id='button' class="btn btn-success btn-lg">Run</button>
+            <button type="button" id='button2' class="btn btn-success btn-lg">test</button>
+        </p>
+    </div>
+</div>
+
+<script type="text/javascript" src="testAnimateJs.js"></script>
+</body>
+
+</html>
