@@ -58,7 +58,7 @@ function set_values(va) {
     va = va.replace(/ /g,"");
     num = va.replace(/[^0-9]/g,"");
     str = va.replace(/[0-9]/g,"");
-    // alert('distance : '+distance+', direction : '+direction);
+    // alert('distance : '+distance+', activity : '+activity);
     if(str === 'left') {
         // target_position_x = target_position_x - 8;
     }

@@ -12,36 +12,17 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>test jquery animate</title>
-    <style>
-        #container {
-            width: 400px;
-            height: 400px;
-            position: relative;
-            background: yellow;
-        }
-        #animate1 {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: red;
-        }
-        #animate2 {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            top: 120px;
-            left: 120px;
-            background-color: blue;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="testAnimate.css">
 </head>
 <body>
+
 <div class="row">
     <!--<div class="col-sm-1"></div>-->
     <div class="col-sm-6">
         <div id ="container">
+            <div id="animate3">
+                <img src="icon-mega-cat.png" alt="HTML5 Icon" width="50" height="50">
+            </div>
             <div id ="animate1"></div>
             <div id ="animate2"></div>
         </div>
@@ -51,8 +32,8 @@
         <p>왼쪽, 오른쪽, 위쪽, 아래쪽를 입력하세요.</p>
         <form>
             <div class="form-group">
-                <label for="comment">Command:</label>
-                <textarea class="form-control has-success" rows="10" id="comment" placeholder="left 60;"></textarea>
+                <label for="command">Command:</label>
+                <textarea class="form-control has-success" rows="10" id="command" placeholder="left 60;"></textarea>
             </div>
             <div class="alert alert-danger" id="wrong_text_show" hidden>
                 <strong>Wrong!</strong> 확인하세요 <a id="wrong_text"></a>
@@ -60,8 +41,9 @@
         </form>
 
         <p>
-            <button type="button" id='button' class="btn btn-success btn-lg">Run</button>
-            <button type="button" id='button2' class="btn btn-success btn-lg">test</button>
+            <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
+            <button type="button" id='test_button' class="btn btn-default btn-lg">test</button>
+            <button type="button" id='play_button' class="btn btn-primary btn-lg">play</button>
         </p>
     </div>
 </div>
