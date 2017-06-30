@@ -23,8 +23,8 @@
             width: 50px;
             height: 50px;
             position: absolute;
-            top: 0px;
-            left: 0px;
+            top: 0;
+            left: 0;
             background-color: red;
         }
         #animate2 {
@@ -51,8 +51,11 @@
         <p>왼쪽, 오른쪽, 위쪽, 아래쪽를 입력하세요.</p>
         <form>
             <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea id="input1" class="form-control has-success" rows="10" id="comment" placeholder="left 60;"></textarea>
+                <label for="comment">Command:</label>
+                <textarea class="form-control has-success" rows="10" id="comment" placeholder="left 60;"></textarea>
+            </div>
+            <div class="alert alert-danger" id="wrong_text_show" hidden>
+                <strong>Wrong!</strong> 확인하세요 <a id="wrong_text"></a>
             </div>
         </form>
 

@@ -37,10 +37,10 @@ $(document).ready(function(){
 
 
 function set_time(time) {
-    // alert("길이? : "+vals.length);
-    // alert(time+' 밖에');
+    // alert("길이? : "+programmed_line.length);
+    // alert(times_running+' 밖에');
     if(time < vals.length-1){
-        // alert(time+' 안에');
+        // alert(times_running+' 안에');
         var va = vals[time];
         pos_x = $('#animate').offset().left;
         pos_y = $('#animate').offset().top;
@@ -58,9 +58,9 @@ function set_values(va) {
     va = va.replace(/ /g,"");
     num = va.replace(/[^0-9]/g,"");
     str = va.replace(/[0-9]/g,"");
-    // alert('num : '+num+', str : '+str);
+    // alert('distance : '+distance+', direction : '+direction);
     if(str === 'left') {
-        // pos_x = pos_x - 8;
+        // target_position_x = target_position_x - 8;
     }
     frame();
 }
