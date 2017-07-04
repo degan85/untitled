@@ -75,6 +75,7 @@ var command = {
 
 //todo 완료되면 저장하고 목록 불러오기 만들기
 var $running_object;
+var $container = $('#container');
 var $girl = $('#girl');
 var $fish = $('#fish');
 
@@ -84,12 +85,12 @@ var $play_button = $('#play_button');
 var $refresh_button = $('#refresh_button');
 var clicked_paly = false;
 
-$(document).ready(function(){
+$ (function(){
 
     //todo 대상자랑 클릭으로 이동 후 처음 위치 저장하게
     $running_object = $girl;
-    started_position.x = '0'; /* $running_object.offset().left; */
-    started_position.y = '0'; /* $running_object.offset().top; */
+    /*started_position.x = '0'; /!* $running_object.offset().left; *!/
+    started_position.y = '0'; /!* $running_object.offset().top; *!/*/
     story = '0';
 
     $run_button.click(function(){
@@ -112,9 +113,18 @@ $(document).ready(function(){
     $refresh_button.click(function() {
         location.reload();
     })
+
+    $running_object.draggable();
+    $container.droppable({
+        drop: function( event, ui ) {
+            $( this )
+            started_position.x = $running_object.offset().left;
+            started_position.y = $running_object.offset().top;
+        }
+    });
 });
 function set_init() {
-    /*$running_object.css({"left": started_position_x, "top": started_position_y });*/
+    $running_object.css({"left": started_position.x, "top": started_position.y });
     clicked_paly = false;
     $('#wrong_text_show').hide();
     distance = 0;

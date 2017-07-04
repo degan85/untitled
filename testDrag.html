@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; background-color: aqua; margin: 10px 10px 10px 0; }
+        #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; background-color: antiquewhite;}
+    </style>
+</head>
+<body>
+    <div id="test">
+        <input id="input_test">
+    </div>
+
+    <div id="draggable" class="ui-widget-content">
+        <p>Drag me to my target</p>
+    </div>
+
+    <div id="droppable" class="ui-widget-header">
+        <p>Drop here</p>
+    </div>
+
+
+<script>
+    $( function() {
+        $( "#draggable" ).draggable();
+        $( "#droppable" ).droppable({
+            drop: function( event, ui ) {
+                $( this )
+                    var text = "left : "+ $( "#draggable" ).offset().left+", top : "+$( "#draggable" ).offset().top;
+                $('#input_test').val(text);
+            }
+        });
+    } );
+</script>
+
+</body>
+</html>
