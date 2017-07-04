@@ -75,20 +75,19 @@ var command = {
 
 //todo 완료되면 저장하고 목록 불러오기 만들기
 var $running_object;
-var $animate1 = $('#animate1');
-var $animate2 = $('#animate2');
-var $animate3 = $('#animate3');
+var $girl = $('#girl');
+var $fish = $('#fish');
 
 var $run_button = $('#run_button');
 var $test_button = $('#test_button');
 var $play_button = $('#play_button');
-
+var $refresh_button = $('#refresh_button');
+var clicked_paly = false;
 
 $(document).ready(function(){
 
     //todo 대상자랑 클릭으로 이동 후 처음 위치 저장하게
-
-    $running_object = $animate1;
+    $running_object = $girl;
     started_position.x = '0'; /* $running_object.offset().left; */
     started_position.y = '0'; /* $running_object.offset().top; */
     story = '0';
@@ -96,27 +95,34 @@ $(document).ready(function(){
     $run_button.click(function(){
         set_init();
         $run_button.addClass("disabled");
+        $run_button.prop( "disabled", true );
         clicked_run_button();
     });
 
 
     $test_button.click(function () {
-       loopBoat();
-   });
+        loopBoat();
+    });
 
     $play_button.click(function () {
+        clicked_paly = true;
         clicked_play_button();
     });
+
+    $refresh_button.click(function() {
+        location.reload();
+    })
 });
 function set_init() {
     /*$running_object.css({"left": started_position_x, "top": started_position_y });*/
+    clicked_paly = false;
     $('#wrong_text_show').hide();
     distance = 0;
 }
 
 function loopBoat() {
-    $animate2.animate({ 'top' : '140px'}, 500)
-        .animate({ 'top' : '120px'}, 500, loopBoat);
+    $fish.animate({ 'top' : '240px'}, 500)
+        .animate({ 'top' : '250px'}, 500, loopBoat);
 }
 
 function clicked_run_button() {
@@ -145,7 +151,7 @@ function clicked_play_button() {
     //     started_position.y = 0;
     //     written_text = activityData.get_data(key_story)[2];
     //
-        set_programmed_line();
+    set_programmed_line();
     // }
 }
 
@@ -161,12 +167,17 @@ function set_times_running() {
 }
 
 function finish_run() {
-    if (confirm("저장 하시겠습니까?") === true){
-        confirm_save();
-    }else{
-        cancel_save();
+    if(!clicked_paly) {
+        if (confirm("저장 하시겠습니까?") === true){
+            confirm_save();
+            $('#command').val('');
+        }else{
+            cancel_save();
+        }
     }
+    $run_button.prop( "disabled", false );
     $run_button.removeClass("disabled");
+    clicked_paly = false;
 }
 
 function confirm_save() {
@@ -217,6 +228,7 @@ function wrong_command() {
     $('#wrong_text').html(activity);
     $('#wrong_text_show').show();
     $run_button.removeClass("disabled");
+    $run_button.prop( "disabled", false );
 }
 
 //todo frame 정리하기
@@ -236,7 +248,7 @@ function frame_right_move() {
     times_running++;
     target_position_x = parseInt(current_position_x) + parseInt(distance);
     if(target_position_x > 350) {
-        $running_object.animate({left:350},set_moving_time(350-current_position_x),set_times_running);
+        $running_object.animate({left:350},set_moving_time(320-current_position_x),set_times_running);
     }else {
         $running_object.animate({left:target_position_x},set_moving_time(target_position_x),set_times_running);
     }
@@ -259,7 +271,7 @@ function frame_down_move() {
     times_running++;
     target_position_y = parseInt(current_position_y) + parseInt(distance);
     if(target_position_y > 350) {
-        $running_object.animate({top:350}, set_moving_time(350-current_position_y), set_times_running);
+        $running_object.animate({top:350}, set_moving_time(320-current_position_y), set_times_running);
     }else {
         $running_object.animate({top:target_position_y}, set_moving_time(target_position_y), set_times_running);
     }

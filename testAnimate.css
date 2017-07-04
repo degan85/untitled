@@ -7,26 +7,16 @@
     background-image: url("background.jpg");
     background-repeat: repeat-x;
 }
-#animate3 {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 200px;
-    left: 200px;
+#size {
+    width: 400px;
 }
-#animate1 {
-    width: 50px;
-    height: 50px;
+#girl {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: red;
+    top: 0px;
+    left: 0px;
 }
-#animate2 {
-    width: 30px;
-    height: 30px;
+#fish {
     position: absolute;
-    top: 120px;
-    left: 120px;
-    background-color: blue;
+    top: 250px;
+    left: 260px;
 }

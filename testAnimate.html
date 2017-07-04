@@ -20,31 +20,34 @@
     <!--<div class="col-sm-1"></div>-->
     <div class="col-sm-6">
         <div id ="container">
-            <div id="animate3">
-                <img src="icon-mega-cat.png" alt="HTML5 Icon" width="50" height="50">
+            <div id="girl">
+                <img src="girl.png" alt="girl" width="80" height="80">
             </div>
-            <div id ="animate1"></div>
-            <div id ="animate2"></div>
+            <div id="fish">
+                <img src="fish.png" alt="fish" width="50" height="50">
+            </div>
+        </div>
+        <div id="size">
+            <span>0</span><span style="float: right;">400</span>
         </div>
     </div>
     <div class="col-sm-5">
-        <h2>사각형 움직이기(animate)</h2>
-        <p>왼쪽, 오른쪽, 위쪽, 아래쪽를 입력하세요.</p>
+        <div>
+            <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
+            <button type="button" id='test_button' class="btn btn-default btn-lg">fish</button>
+            <button type="button" id='play_button' class="btn btn-primary btn-lg">Play</button>
+            <button type="button" id='refresh_button' class="btn btn-info btn-lg" style="float: right;">Refresh</button>
+        </div>
+        <h2>Animate Test</h2>
+        <p>please command left, right, up, down and put a semicolon(;)</p>
+        <div class="alert alert-danger" id="wrong_text_show" hidden>
+            <strong>Wrong!</strong> 확인하세요 <a id="wrong_text"></a>
+        </div>
         <form>
             <div class="form-group">
-                <label for="command">Command:</label>
                 <textarea class="form-control has-success" rows="10" id="command" placeholder="left 60;"></textarea>
             </div>
-            <div class="alert alert-danger" id="wrong_text_show" hidden>
-                <strong>Wrong!</strong> 확인하세요 <a id="wrong_text"></a>
-            </div>
         </form>
-
-        <p>
-            <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
-            <button type="button" id='test_button' class="btn btn-default btn-lg">test</button>
-            <button type="button" id='play_button' class="btn btn-primary btn-lg">play</button>
-        </p>
     </div>
 </div>
 
