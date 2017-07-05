@@ -31,31 +31,36 @@
         </div>
         <div id="size">
             <span>0</span><span style="float: right;">400</span>
+            <div>
+                <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
+                <button type="button" id='test_button' class="btn btn-default btn-lg">fish</button>
+                <button type="button" id='save_button' class="btn btn-primary btn-lg">Save</button>
+                <button type="button" id='refresh_button' class="btn btn-info btn-lg" style="float: right;">Refresh</button>
+            </div>
         </div>
     </div>
     <div class="col-sm-5">
-        <div>
-            <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
-            <button type="button" id='test_button' class="btn btn-default btn-lg">fish</button>
-            <button type="button" id='save_button' class="btn btn-primary btn-lg">Save</button>
-            <button type="button" id='refresh_button' class="btn btn-info btn-lg" style="float: right;">Refresh</button>
-        </div>
+
         <h2>Animate Test</h2>
         <p>please command left, right, up, down and put a semicolon(;)</p>
         <div class="alert alert-danger" id="wrong_text_show" hidden>
             <strong>Wrong!</strong> 확인하세요 <a id="wrong_text"></a>
         </div>
         <form>
-            <div class="form-group">
-                <ul>
-                    <li id="draggable" class="list-group-item">
-                        <select class="list-group-item">
+            <div class="input-group">
+                <ul class="no_dropped">
+                    <li id="draggable" class="input-group">
+                        <span class="input-group-addon">
+                        <select class="list-group-item input-lg">
                             <option>오른쪽</option>
                             <option>왼쪽</option>
                             <option>위</option>
                             <option>아래</option>
                         </select>
-                        <input type="text" class="form-control"></li>
+                        </span> move
+                        <input type="text" class="form-control input-sm" id="inputsm" onKeyPress="return number_key_ckeck(event)"
+
+                    </li>
                 </ul>
 
                 <ul class="ul_container" id="sortable">

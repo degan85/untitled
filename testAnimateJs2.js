@@ -149,8 +149,6 @@ $(function(){
 
     $run_button.click(function(){
         set_init();
-        $run_button.addClass("disabled");
-        $run_button.prop( "disabled", true );
         clicked_run_button();
     });
 
@@ -190,6 +188,15 @@ $(function(){
 
 });
 
+function number_key_ckeck(e) {
+    var keyValue = event.keyCode;
+    if (((keyValue >= 48) && (keyValue <= 57))){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function set_init() {
     $running_object.css({"left": started_position.x, "top": started_position.y });
     written_text='';
@@ -203,14 +210,38 @@ function loopBoat() {
 }
 
 function clicked_run_button() {
-    times_running    = 0;
+
+    set_container();
+
+    if(validation_check()){
+        $run_button.addClass("disabled");
+        $run_button.prop( "disabled", true );
+        times_running    = 0;
+        remove_class_running_line();
+
+        for(var i=0; i<li_selected.length; i++) {
+            written_text += li_selected.eq(i).val() + li_input.eq(i).val() + ';';
+        }
+        set_programmed_line();
+    }
+
+}
+function set_container() {
     li_selected = $('ul.ul_container li option:selected');
     li_input = $('ul.ul_container li input');
-    li_selected.parent().parent().removeClass("running_line");
-    for(var i=0; i<li_selected.length; i++) {
-        written_text += li_selected.eq(i).val() + li_input.eq(i).val() + ';';
+}
+
+function validation_check() {
+    for(var i=0; i<li_input.length;i++) {
+        if(li_input.eq(i).val() === '') {
+            alert('인수를 모두 입력하세요');
+            return false;
+        }
     }
-    set_programmed_line();
+    return true;
+}
+function remove_class_running_line() {
+    li_selected.parent().parent().parent().removeClass("running_line");
 }
 
 function set_programmed_line() {
@@ -234,13 +265,14 @@ function set_times_running() {
     }
 }
 function running_line_color() {
-    li_selected.parent().parent().removeClass("running_line");
-    li_selected.eq(times_running).parent().parent().addClass("running_line");
+    remove_class_running_line();
+    li_selected.eq(times_running).parent().parent().parent().addClass("running_line");
     $run_button.removeClass("disabled");
 }
 function finish_run() {
     $run_button.prop( "disabled", false );
     $run_button.removeClass("disabled");
+    remove_class_running_line();
 }
 
 function cancel_save() {

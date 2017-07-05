@@ -7,7 +7,7 @@
     background-image: url("background.jpg");
     background-repeat: repeat-x;
 }
-#size {
+#size{
     width: 400px;
 }
 #girl {
@@ -20,8 +20,38 @@
     top: 250px;
     left: 260px;
 }
-.running_line {
-    background-color: crimson;
+
+.no_dropped li {
+    width: 100%;
+    background-color: aliceblue;
 }
-ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
-li { margin: 5px; padding: 5px; width: 150px; }
+
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 10px;
+}
+
+#start {
+    width: 100%;
+    background-color: cadetblue;
+}
+
+li {
+/*margin: 5px;
+padding: 5px;*/
+width: 100%;
+background-color: bisque;
+}
+
+input {
+    width: 30%;
+}
+span.input-group-addon{
+    margin: 0;
+    padding: 0;
+}
+li.running_line {
+    background-color: limegreen;
+}
