@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Draggable + Sortable</title>
+    <style>
+        ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+        li { margin: 5px; padding: 5px; width: 150px; }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        var lis;
+        var liin;
+
+        $( function() {
+            $( "#sortable" ).sortable({
+                revert: true
+            });
+            $( "#draggable" ).draggable({
+                connectToSortable: "#sortable",
+                helper: "clone",
+                revert: "invalid"
+            });
+
+            $( "ul, li" ).disableSelection();
+
+            /*$(".ul_container").mouseup(function(){
+                alert('sss');
+                lis = $('ul.ul_container li option:selected');
+                liin = $('ul.ul_container li input');
+            });*/
+
+            $('#run').click(function() {
+                lis = $('ul.ul_container li option:selected');
+                liin = $('ul.ul_container li input');
+                var text='';
+                for(var i=0; i<lis.length; i++) {
+                    text += lis.eq(i).val()+liin.eq(i).val()+';';
+                }
+                alert(text);
+            });
+        } );
+    </script>
+</head>
+<body>
+
+<ul>
+    <li id="draggable" class="list-group-item">
+        <select class="list-group-item">
+            <option>오른쪽</option>
+            <option>왼쪽</option>
+            <option>위</option>
+            <option>아래</option>
+        </select>
+        <input type="text" class="form-control"></li>
+</ul>
+
+<ul class="ul_container" id="sortable">
+    <li class="list-group-item" id="start">시작~!!</li>
+</ul>
+<button id="run">run</button>
+
+</body>
+</html>

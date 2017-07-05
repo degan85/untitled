@@ -114,10 +114,10 @@ $ (function(){
         location.reload();
     })
 
-    $running_object.draggable();
+    $running_object.draggable({ cursor: "move", containment: $container, scroll: false, opacity: 0.7, helper: "clone"});
     $container.droppable({
         drop: function( event, ui ) {
-            $( this )
+            $( this );
             started_position.x = $running_object.offset().left;
             started_position.y = $running_object.offset().top;
         }
