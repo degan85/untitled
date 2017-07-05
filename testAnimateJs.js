@@ -241,7 +241,7 @@ function wrong_command() {
     $run_button.prop( "disabled", false );
 }
 
-//todo frame 정리하기
+//todo set_frame 정리하기
 function frame_left_move() {
     times_running++;
     target_position_x = parseInt(current_position_x) - parseInt(distance);

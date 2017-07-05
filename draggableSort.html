@@ -20,7 +20,8 @@
 
         $( function() {
             $( "#sortable" ).sortable({
-                revert: true
+                revert: true,
+                items: "li:not(.ui-state-disabled)"
             });
             $( "#draggable" ).draggable({
                 connectToSortable: "#sortable",
@@ -32,8 +33,8 @@
 
             /*$(".ul_container").mouseup(function(){
                 alert('sss');
-                lis = $('ul.ul_container li option:selected');
-                liin = $('ul.ul_container li input');
+                li_selected = $('ul.ul_container li option:selected');
+                li_input = $('ul.ul_container li input');
             });*/
 
             $('#run').click(function() {
@@ -62,7 +63,7 @@
 </ul>
 
 <ul class="ul_container" id="sortable">
-    <li class="list-group-item" id="start">시작~!!</li>
+    <li class="list-group-item ui-state-disabled" id="start">시작~!!</li>
 </ul>
 <button id="run">run</button>
 
