@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -13,12 +14,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
     <title>test jquery animate</title>
     <link rel="stylesheet" type="text/css" href="testAnimate.css">
 </head>
 <body>
+
 <div class="row">
     <!--<div class="col-sm-1"></div>-->
     <div class="col-sm-6">
@@ -54,9 +57,9 @@
                     <option value="easeInOutBounce">easeInOutBounce</option>
                 </select>
                 <select class="list-group-item input-lg" name="speed" id="speed" style="background:#ff7970; color:black;">
-                    <option value="300">빠름</option>
-                    <option value="3000" selected>보통</option>
-                    <option value="6000">느림</option>
+                    <option value="300">fast</option>
+                    <option value="3000" selected>normal</option>
+                    <option value="6000">slow</option>
                 </select>
             </div>
         </div>
@@ -64,28 +67,30 @@
     <div class="col-sm-5">
         <h2>Animate</h2>
         <p>아이를 움직여 원하는 곳에 놓아주세요</p>
-        <p>시작 밑으로 연결해서 움직여 주세요!!</p>
+        <p>시작 밑으로 원하는 움직임을 드래그해서 연결해 주세요</p>
+        <p>노란색을 선택해 원하는 움직임을 선택해 주세요</p>
+        <p><span style="color:green">Run</span>을 눌러 실행해 주세요!!</p>
         <div class="alert alert-danger" id="wrong_text_show" hidden>
-            <strong>Wrong!</strong> 확인하세요 <a id="wrong_text"></a>
+            <strong>Wrong!</strong> Please check!! <a id="wrong_text"></a>
         </div>
         <form>
             <div class="input-group">
                 <ul class="no_dropped">
-                    <li id="draggable" class="input-group">
+                    <li class="input-group draggable">
                         <span class="input-group-addon">
-                        <select class="list-group-item input-lg">
-                            <option>오른쪽</option>
-                            <option>왼쪽</option>
-                            <option>위</option>
-                            <option>아래</option>
+                        <select class="list-group-item input-lg" onclick="focus()">
+                            <option>right</option>
+                            <option>left</option>
+                            <option>up</option>
+                            <option>down</option>
                         </select>
                         </span> move
-                        <input type="text" class="form-control input-sm" onKeyPress="return number_key_ckeck(event)">
+                        <input type="text" class="form-control input-sm" onKeyPress="return number_key_ckeck(event)" onclick="focus()">
                     </li>
                 </ul>
 
                 <ul class="ul_container" id="sortable">
-                    <li class="list-group-item ui-state-disabled" id="start">시작~!!</li>
+                    <li class="list-group-item ui-state-disabled" id="start">Start~!!</li>
                 </ul>
             </div>
         </form>

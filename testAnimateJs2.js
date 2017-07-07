@@ -179,11 +179,21 @@ $(function(){
         items: "li:not(.ui-state-disabled)"
     });
 
-    $( "#draggable" ).draggable({
+    $( ".draggable" ).draggable({
         connectToSortable: "#sortable",
         helper: "clone",
         revert: "invalid"
     });
+
+ /*   $('.draggable input').click(function() {
+        alert('ss');
+        $(this).focus();
+    });
+
+    $('.input-group input').click(function() {
+        alert('ss');
+        $(this).focus();
+    });*/
 
     $( "ul, li" ).disableSelection();
 
