@@ -1,14 +1,4 @@
 /**
- * Created by user on 2017-07-05.
- */
-/**
- * Created by user on 2017-06-27.
- */
-/**
- * Created by user on 2017-06-20.
- */
-
-/**
  * save list.
  */
 var activityData = function(){
@@ -133,7 +123,7 @@ var $running_object;
 var $container = $('#container');
 var $girl = $('#girl');
 var $fish = $('#fish');
-
+var $background_img = $('#background_img');
 var $run_button = $('#run_button');
 var $test_button = $('#test_button');
 var $save_button = $('#save_button');
@@ -143,7 +133,23 @@ var li_selected;
 var li_input;
 var selected_easing;
 var selected_speed;
+
+var block_width_count = 12;
+var block_height_count = 6;
+var background_width_size;
+var background_height_size;
+var block_width_size;
+var block_height_size;
 $(function(){
+
+    $(window).resize(function(){
+        background_width_size = $background_img.height();
+        background_height_size = $background_img.width();
+        block_width_size = background_width_size / block_width_count;
+        block_height_size = background_height_size / block_height_count;
+        $girl.height = block_height_size;
+        alert("width : "+block_width_size+" , height : "+block_height_size);
+    }).resize();
 
     $running_object = $girl;
     story = '0';
@@ -184,16 +190,6 @@ $(function(){
         helper: "clone",
         revert: "invalid"
     });
-
- /*   $('.draggable input').click(function() {
-        alert('ss');
-        $(this).focus();
-    });
-
-    $('.input-group input').click(function() {
-        alert('ss');
-        $(this).focus();
-    });*/
 
     $( "ul, li" ).disableSelection();
 
@@ -248,7 +244,7 @@ function set_container() {
 function validation_check() {
     for(var i=0; i<li_input.length;i++) {
         if(li_input.eq(i).val() === '') {
-            alert('인수를 모두 입력하세요');
+            alert('please check value');
             return false;
         }
     }
