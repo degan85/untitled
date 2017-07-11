@@ -43,7 +43,8 @@ var activityData = function(){
 }();
 
 var frame = function(){
-
+    var width_limit;
+    var height_limit;
     var _left_move = function() {
         times_running++;
         target_position_x = parseInt(current_position_x) - parseInt(distance);
@@ -56,10 +57,12 @@ var frame = function(){
     };
 
     var _right_move = function() {
+        width_limit = background_width_size - $running_object.width();
         times_running++;
+        alert(width_limit);
         target_position_x = parseInt(current_position_x) + parseInt(distance);
-        if(target_position_x > 320) {
-            $running_object.animate({left:320},set_moving_time(320-current_position_x), selected_easing, set_times_running);
+        if(target_position_x > width_limit) {
+            $running_object.animate({left:width_limit},set_moving_time(width_limit-current_position_x), selected_easing, set_times_running);
         }else {
             $running_object.animate({left:target_position_x},set_moving_time(target_position_x), selected_easing, set_times_running);
         }
@@ -76,10 +79,11 @@ var frame = function(){
     };
 
     var _down_move = function () {
+        height_limit = background_height_size - $running_object.height();
         times_running++;
         target_position_y = parseInt(current_position_y) + parseInt(distance);
-        if(target_position_y > 320) {
-            $running_object.animate({top:320}, set_moving_time(320-current_position_y), selected_easing, set_times_running);
+        if(target_position_y > height_limit) {
+            $running_object.animate({top:height_limit}, set_moving_time(height_limit-current_position_y), selected_easing, set_times_running);
         }else {
             $running_object.animate({top:target_position_y}, set_moving_time(target_position_y), selected_easing, set_times_running);
         }
@@ -143,8 +147,8 @@ var block_height_size;
 $(function(){
 
     $(window).resize(function(){
-        background_width_size = $background_img.height();
-        background_height_size = $background_img.width();
+        background_width_size = $background_img.width();
+        background_height_size = $background_img.height();
         block_width_size = background_width_size / block_width_count;
         block_height_size = background_height_size / block_height_count;
         $girl.height = block_height_size;
