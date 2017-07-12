@@ -57,7 +57,7 @@ var frame = function(){
     };
 
     var _right_move = function() {
-        width_limit = background_width_size - $running_object.width();
+        width_limit = background_size.current_width - $running_object.width();
         times_running++;
         alert(width_limit);
         target_position_x = parseInt(current_position_x) + parseInt(distance);
@@ -79,7 +79,7 @@ var frame = function(){
     };
 
     var _down_move = function () {
-        height_limit = background_height_size - $running_object.height();
+        height_limit = background_size.current_height - $running_object.height();
         times_running++;
         target_position_y = parseInt(current_position_y) + parseInt(distance);
         if(target_position_y > height_limit) {
@@ -140,23 +140,30 @@ var selected_speed;
 
 var block_width_count = 12;
 var block_height_count = 6;
-var background_width_size;
-var background_height_size;
+
+var background_size = {
+    current_width : 0,
+    current_height : 0,
+    before_width : 0,
+    before_height :0
+};
+
 var block_width_size;
 var block_height_size;
+
+
 $(function(){
-
-    $(window).resize(function(){
-        background_width_size = $background_img.width();
-        background_height_size = $background_img.height();
-        block_width_size = background_width_size / block_width_count;
-        block_height_size = background_height_size / block_height_count;
-        $girl.height = block_height_size;
-        alert("width : "+block_width_size+" , height : "+block_height_size);
-    }).resize();
-
     $running_object = $girl;
     story = '0';
+
+    background_size.before_width = $background_img.width();
+    background_size.before_height = $background_img.height();
+    background_size.current_width = $background_img.width();
+    background_size.current_height = $background_img.height();
+
+    $(window).resize(function(){
+        set_position_resize();
+    }).resize();
 
     $run_button.click(function(){
         set_init();
@@ -198,6 +205,20 @@ $(function(){
     $( "ul, li" ).disableSelection();
 
 });
+function set_position_resize() {
+    background_size.before_width = background_size.current_width;
+    background_size.before_height = background_size.current_height;
+
+    background_size.current_width = $background_img.width();
+    background_size.current_height = $background_img.height();
+
+    block_width_size = background_size.current_width / block_width_count;
+    block_height_size = background_size.current_height / block_height_count;
+
+    started_position.x = background_size.current_width*started_position.x/background_size.before_width;
+    started_position.y = background_size.current_height*started_position.y/background_size.before_height;
+    $running_object.css({"left": started_position.x, "top": started_position.y });
+}
 
 function number_key_ckeck(e) {
     var keyValue = event.keyCode;
