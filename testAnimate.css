@@ -19,9 +19,9 @@
     top: 0px;
     left: 0px;
 }
-#fish {
+#cloud {
     position: absolute !important;
-    top: 250px;
+    top: 10px;
     left: 260px;
 }
 

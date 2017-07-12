@@ -30,23 +30,18 @@
             <div id="girl" style="width:15%">
                 <img src="girl.png" alt="girl" id="imgg" style="width:100%">
             </div>
-            <div id="fish">
-                <img src="fish.png" alt="fish" width="50" height="50">
-                </div>
+            <div id="cloud" style="width:15%">
+                <img src="cloud.png" alt="cloud" style="width:100%">
+            </div>
 
 
         </div>
-
-        <div id="size">
-            <span>0</span><span style="float: right;">400</span>
-
             <div>
                 <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
-                <button type="button" id='test_button' class="btn btn-default btn-lg">fish</button>
-                <button type="button" id='save_button' class="btn btn-primary btn-lg">Save</button>
-                <button type="button" id='refresh_button' class="btn btn-info btn-lg" style="float: right;">Refresh</button>
+               <!-- <button type="button" id='test_button' class="btn btn-default btn-lg">fish</button>-->
+               <!-- <button type="button" id='save_button' class="btn btn-primary btn-lg">Save</button>-->
+                <button type="button" id='refresh_button' class="btn btn-info btn-lg">Refresh<!--style="float: right"--></button>
             </div>
-        <hr>
             <div>
                 <select class="list-group-item input-lg" name="effects" id="effectTypes" style="background:#f9ff52; color:black;">
                     <option value="easeInSine">easeInSine</option>
@@ -62,19 +57,20 @@
                     <option value="easeInOutBounce">easeInOutBounce</option>
                 </select>
                 <select class="list-group-item input-lg" name="speed" id="speed" style="background:#ff7970; color:black;">
-                    <option value="300">fast</option>
-                    <option value="3000" selected>normal</option>
-                    <option value="6000">slow</option>
+                    <option value="100">fast</option>
+                    <option value="600" selected>normal</option>
+                    <option value="2000">slow</option>
                 </select>
             </div>
         </div>
-    </div>
+
     <div class="col-sm-3.5">
         <h2>Animate</h2>
         <p>아이를 움직여 원하는 곳에 놓아주세요</p>
         <p>시작 밑으로 원하는 움직임을 드래그해서 연결해 주세요</p>
         <p>노란색을 선택해 원하는 움직임을 선택해 주세요</p>
         <p><span style="color:green">Run</span>을 눌러 실행해 주세요!!</p>
+        <span>가로 : 12칸, 세로 6칸</span>
         <div class="alert alert-danger" id="wrong_text_show" hidden>
             <strong>Wrong!</strong> Please check!! <a id="wrong_text"></a>
         </div>
@@ -93,6 +89,7 @@
                         <input type="text" class="form-control input-sm" onKeyPress="return number_key_ckeck(event)" onclick="focus()">
                     </li>
                 </ul>
+<br><br><br><br>
 
                 <ul class="ul_container" id="sortable">
                     <li class="list-group-item ui-state-disabled" id="start">Start~!!</li>
@@ -101,17 +98,6 @@
         </form>
     </div>
 </div>
-<script>
-
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    ctx.lineWidth = 8;
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(300, 150);
-    ctx.stroke();
-
-</script>
 <script type="text/javascript" src="testAnimateJs2.js"></script>
 </body>
 

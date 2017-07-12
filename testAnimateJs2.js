@@ -47,44 +47,48 @@ var frame = function(){
     var height_limit;
     var _left_move = function() {
         times_running++;
+        distance = move_block * block_width_size;
         target_position_x = parseInt(current_position_x) - parseInt(distance);
 
         if (target_position_x < 0) {
-            $running_object.animate({left: 0}, set_moving_time(), selected_easing, set_times_running);
+            $running_object.animate({left: 0}, set_moving_time(move_block), selected_easing, set_times_running);
         } else {
-            $running_object.animate({left: target_position_x}, set_moving_time(), selected_easing, set_times_running);
+            $running_object.animate({left: target_position_x}, set_moving_time(move_block), selected_easing, set_times_running);
         }
     };
 
     var _right_move = function() {
         width_limit = background_size.current_width - $running_object.width();
         times_running++;
+        distance = move_block * block_width_size;
         target_position_x = parseInt(current_position_x) + parseInt(distance);
         if(target_position_x > width_limit) {
-            $running_object.animate({left:width_limit},set_moving_time(), selected_easing, set_times_running);
+            $running_object.animate({left:width_limit},set_moving_time(move_block), selected_easing, set_times_running);
         }else {
-            $running_object.animate({left:target_position_x},set_moving_time(), selected_easing, set_times_running);
+            $running_object.animate({left:target_position_x},set_moving_time(move_block), selected_easing, set_times_running);
         }
     };
 
     var _up_move = function () {
         times_running++;
+        distance = move_block * block_height_size;
         target_position_y = parseInt(current_position_y) - parseInt(distance);
         if(target_position_y < 0) {
-            $running_object.animate({top:0}, set_moving_time(),selected_easing, set_times_running);
+            $running_object.animate({top:0}, set_moving_time(move_block),selected_easing, set_times_running);
         }else {
-            $running_object.animate({top:target_position_y}, set_moving_time(),selected_easing, set_times_running);
+            $running_object.animate({top:target_position_y}, set_moving_time(move_block),selected_easing, set_times_running);
         }
     };
 
     var _down_move = function () {
         height_limit = background_size.current_height - $running_object.height();
         times_running++;
+        distance = move_block * block_height_size;
         target_position_y = parseInt(current_position_y) + parseInt(distance);
         if(target_position_y > height_limit) {
-            $running_object.animate({top:height_limit}, set_moving_time(), selected_easing, set_times_running);
+            $running_object.animate({top:height_limit}, set_moving_time(move_block), selected_easing, set_times_running);
         }else {
-            $running_object.animate({top:target_position_y}, set_moving_time(), selected_easing, set_times_running);
+            $running_object.animate({top:target_position_y}, set_moving_time(move_block), selected_easing, set_times_running);
         }
     };
 
@@ -113,7 +117,8 @@ var target_position_x = 0;
 var target_position_y = 0;
 var activity = '';
 var distance = 0;
-
+var move_block = 0;
+var cloud_position_y;
 var command = {
     left    : ['left', '왼쪽', '좌'],
     right   : ['right', '오른쪽', '우'],
@@ -125,7 +130,7 @@ var command = {
 var $running_object;
 var $container = $('#container');
 var $girl = $('#girl');
-var $fish = $('#fish');
+var $cloud = $('#cloud');
 var $background_img = $('#background_img');
 var $run_button = $('#run_button');
 var $test_button = $('#test_button');
@@ -150,6 +155,8 @@ var background_size = {
 var block_width_size;
 var block_height_size;
 
+
+var run_flag = false;
 //todo change image
 /*var d = new Date
 $('#imgg').attr("src", "/fish.png?"+d.getTime());*/
@@ -171,6 +178,7 @@ $(function(){
     $run_button.click(function(){
         set_init();
         clicked_run_button();
+        loopBoat();
     });
 
 
@@ -187,10 +195,13 @@ $(function(){
     });
 
     $running_object.draggable({ cursor: "move", containment: $container, scroll: false});
+    /*$cloud.draggable({ cursor: "move", containment: $container, scroll: false});*/
+
     $container.droppable({
         drop: function( event, ui ) {
             started_position.x = $running_object.offset().left;
             started_position.y = $running_object.offset().top;
+            /*cloud_position_x = $cloud.offset().top;*/
         }
     });
 
@@ -212,11 +223,7 @@ $(function(){
 function draw_line() {
 
 }
-function clicked_move() {
 
-    var left
-
-}
 function set_position_resize() {
     background_size.before_width = background_size.current_width;
     background_size.before_height = background_size.current_height;
@@ -224,12 +231,14 @@ function set_position_resize() {
     background_size.current_width = $background_img.width();
     background_size.current_height = $background_img.height();
 
-    block_width_size = background_size.current_width / block_width_count;
-    block_height_size = background_size.current_height / block_height_count;
+    block_width_size = (background_size.current_width-$running_object.width()) / (block_width_count);
+    block_height_size = (background_size.current_height-$running_object.height()) / (block_height_count);
 
     started_position.x = background_size.current_width*started_position.x/background_size.before_width;
     started_position.y = background_size.current_height*started_position.y/background_size.before_height;
     $running_object.css({"left": started_position.x, "top": started_position.y });
+    cloud_position_y = background_size.current_width*0.20;
+    $cloud.css({"left": background_size.current_width*0.20, "top": background_size.current_height*0.20 });
 }
 
 function number_key_ckeck(event) {
@@ -249,8 +258,10 @@ function set_init() {
 }
 
 function loopBoat() {
-    $fish.animate({ 'top' : '240px'}, 500)
-        .animate({ 'top' : '250px'}, 500, loopBoat);
+    if(run_flag){
+        $cloud.animate({ 'top' : cloud_position_y}, 500)
+            .animate({ 'top' : cloud_position_y-30}, 500, loopBoat);
+    }
 }
 
 function clicked_run_button() {
@@ -258,6 +269,7 @@ function clicked_run_button() {
     set_container();
 
     if(validation_check()){
+        run_flag = true;
         selected_easing = $('#effectTypes').val();
         selected_speed = $('#speed').val();
 
@@ -320,6 +332,7 @@ function finish_run() {
     $run_button.prop( "disabled", false );
     $run_button.removeClass("disabled");
     remove_class_running_line();
+    run_flag = false;
 }
 
 function cancel_save() {
@@ -329,7 +342,8 @@ function cancel_save() {
 function set_values(run_line) {
     run_line = run_line.replace(/ /g,"");
 
-    distance = run_line.replace(/[^0-9]/g,"");
+    /*distance = run_line.replace(/[^0-9]/g,"");*/
+    move_block = run_line.replace(/[^0-9]/g,"");
     activity = run_line.replace(/[0-9]/g,"");
 
     set_frame();
@@ -367,8 +381,8 @@ function wrong_command() {
     $run_button.prop( "disabled", false );
 }
 
-function set_moving_time(){
-    return parseInt(selected_speed);
+function set_moving_time(move_block){
+    return parseInt(selected_speed*move_block);
 }
 
 function clicked_save_button() {
