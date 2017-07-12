@@ -50,21 +50,20 @@ var frame = function(){
         target_position_x = parseInt(current_position_x) - parseInt(distance);
 
         if (target_position_x < 0) {
-            $running_object.animate({left: 0}, set_moving_time(current_position_x), selected_easing, set_times_running);
+            $running_object.animate({left: 0}, set_moving_time(), selected_easing, set_times_running);
         } else {
-            $running_object.animate({left: target_position_x}, set_moving_time(target_position_x), selected_easing, set_times_running);
+            $running_object.animate({left: target_position_x}, set_moving_time(), selected_easing, set_times_running);
         }
     };
 
     var _right_move = function() {
         width_limit = background_size.current_width - $running_object.width();
         times_running++;
-        alert(width_limit);
         target_position_x = parseInt(current_position_x) + parseInt(distance);
         if(target_position_x > width_limit) {
-            $running_object.animate({left:width_limit},set_moving_time(width_limit-current_position_x), selected_easing, set_times_running);
+            $running_object.animate({left:width_limit},set_moving_time(), selected_easing, set_times_running);
         }else {
-            $running_object.animate({left:target_position_x},set_moving_time(target_position_x), selected_easing, set_times_running);
+            $running_object.animate({left:target_position_x},set_moving_time(), selected_easing, set_times_running);
         }
     };
 
@@ -72,9 +71,9 @@ var frame = function(){
         times_running++;
         target_position_y = parseInt(current_position_y) - parseInt(distance);
         if(target_position_y < 0) {
-            $running_object.animate({top:0}, set_moving_time(current_position_y),selected_easing, set_times_running);
+            $running_object.animate({top:0}, set_moving_time(),selected_easing, set_times_running);
         }else {
-            $running_object.animate({top:target_position_y}, set_moving_time(target_position_y),selected_easing, set_times_running);
+            $running_object.animate({top:target_position_y}, set_moving_time(),selected_easing, set_times_running);
         }
     };
 
@@ -83,9 +82,9 @@ var frame = function(){
         times_running++;
         target_position_y = parseInt(current_position_y) + parseInt(distance);
         if(target_position_y > height_limit) {
-            $running_object.animate({top:height_limit}, set_moving_time(height_limit-current_position_y), selected_easing, set_times_running);
+            $running_object.animate({top:height_limit}, set_moving_time(), selected_easing, set_times_running);
         }else {
-            $running_object.animate({top:target_position_y}, set_moving_time(target_position_y), selected_easing, set_times_running);
+            $running_object.animate({top:target_position_y}, set_moving_time(), selected_easing, set_times_running);
         }
     };
 
@@ -151,6 +150,9 @@ var background_size = {
 var block_width_size;
 var block_height_size;
 
+//todo change image
+/*var d = new Date
+$('#imgg').attr("src", "/fish.png?"+d.getTime());*/
 
 $(function(){
     $running_object = $girl;
@@ -163,6 +165,7 @@ $(function(){
 
     $(window).resize(function(){
         set_position_resize();
+        draw_line();
     }).resize();
 
     $run_button.click(function(){
@@ -205,6 +208,15 @@ $(function(){
     $( "ul, li" ).disableSelection();
 
 });
+
+function draw_line() {
+
+}
+function clicked_move() {
+
+    var left
+
+}
 function set_position_resize() {
     background_size.before_width = background_size.current_width;
     background_size.before_height = background_size.current_height;
@@ -220,7 +232,7 @@ function set_position_resize() {
     $running_object.css({"left": started_position.x, "top": started_position.y });
 }
 
-function number_key_ckeck(e) {
+function number_key_ckeck(event) {
     var keyValue = event.keyCode;
     if (((keyValue >= 48) && (keyValue <= 57))){
         return true;
@@ -355,8 +367,8 @@ function wrong_command() {
     $run_button.prop( "disabled", false );
 }
 
-function set_moving_time(distance){
-    return parseInt(selected_speed);/*distance*10;*/
+function set_moving_time(){
+    return parseInt(selected_speed);
 }
 
 function clicked_save_button() {

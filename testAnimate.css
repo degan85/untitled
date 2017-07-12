@@ -58,8 +58,22 @@ span.input-group-addon{
 }
 li.running_line {
     background-color: limegreen;
+    border: 2px solid #aeb8de;
 }
-
+canvas
+{
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: -10;
+    /* control height and width in code to prevent stretching */
+}
+hr {
+    border-top: 3px ridge #8c8b8b;
+}
+ul.no_dropped
+{
+    border: 2px dashed #82deb5;
+}
 /* input {
   -webkit-user-select: initial;
   -khtml-user-select: initial;
