@@ -27,14 +27,14 @@
 <body>
 <table width="100%">
     <tr>
-        <td colspan="2" align="center" id="table_head">
-            <h1>즐거운 그림동화</h1>
+        <td colspan="2" align="center" id="table_head" >
+            <h1>Menu</h1>
         </td>
     </tr>
     <tr style="padding: 40px; ">
         <td width="60%">
-            <div id ="container" style="width:100%; color:red;">
-                <img src="bg2.jpg" alt="bg" style="width:100%;" id="background_img">
+            <div id ="container" style="width:100%; color:red;" onchange="alert('sss')">
+                <img src="bg2.jpg" alt="bg" style="width:100%;" id="background_img" onchange="alert('sss')">
                 <div id="girl" style="width:15%">
                     <img src="girl.png" alt="girl" id="imgg" style="width:100%">
                 </div>
@@ -117,13 +117,14 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="table_button">
             <button type="button" id='run_button' class="btn btn-success btn-lg">Run</button>
             <button type="button" id='see_code' class="btn btn-warning btn-lg" onclick="showCode()">see code</button>
-            <button type="button" id='run_code' class="btn btn-warning btn-lg" onclick="runCode()">run code</button>
+            <!--<button type="button" id='run_code' class="btn btn-warning btn-lg" onclick="runCode()">run code</button>-->
             <button type="button" id='refresh_button' class="btn btn-info btn-lg" style="float: right;">Refresh<!----></button>
         </td>
         <td>
+
             <!--<select class="list-group-item input-lg" name="effects" id="effectTypes" style="background:#f9ff52; color:black;">
                 <option value="easeInSine">easeInSine</option>
                 <option value="easeOutSine">easeOutSine</option>
@@ -142,6 +143,11 @@
                 <option value="600" selected>normal</option>
                 <option value="2000">slow</option>
             </select>-->
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <h3> Footer</h3>
         </td>
     </tr>
 </table>

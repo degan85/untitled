@@ -172,7 +172,6 @@ $(function(){
 
     $(window).resize(function(){
         set_position_resize();
-        draw_line();
     }).resize();
 
     $run_button.click(function(){
@@ -220,9 +219,6 @@ $(function(){
 
 });
 
-function draw_line() {
-
-}
 
 function set_position_resize() {
     background_size.before_width = background_size.current_width;

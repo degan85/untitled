@@ -74,6 +74,9 @@ ul.no_dropped
 {
     border: 2px dashed #82deb5;
 }
+table td.table_button {
+    padding: 10px;
+}
 /* input {
   -webkit-user-select: initial;
   -khtml-user-select: initial;
