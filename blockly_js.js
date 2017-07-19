@@ -1,5 +1,8 @@
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
+/*var workspace = Blockly.inject(blocklyDiv, options);
+var toolbox = document.getElementById("toolbox");*/
+
 var workspace = Blockly.inject(blocklyDiv,
     {media: 'blocklyTest/media/',
         toolbox: document.getElementById('toolbox'),
@@ -16,6 +19,38 @@ var workspace = Blockly.inject(blocklyDiv,
                 colour: '#6a74cc',
                 snap: true},
         trashcan: true});
+
+var options = {
+    toolbox : toolbox,
+    collapse : true,
+    comments : true,
+    disable : true,
+    maxBlocks : Infinity,
+    trashcan : true,
+    horizontalLayout : false,
+    toolboxPosition : 'start',
+    css : true,
+    media : 'https://blockly-demo.appspot.com/static/media/',
+    rtl : false,
+    scrollbars : true,
+    sounds : true,
+    oneBasedIndex : true,
+    grid: {
+        spacing: 20,
+        length: 2,
+        colour: '#6a74cc',
+        snap: true
+    },
+    zoom : {
+        controls : true,
+        wheel : true,
+        startScale : 1,
+        maxScale : 3,
+        minScale : 0.3,
+        scaleSpeed : 3
+    }
+};
+
 var onresize = function(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
     var element = blocklyArea;
@@ -32,6 +67,7 @@ var onresize = function(e) {
     blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
     blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 };
+
 window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(workspace);
@@ -42,3 +78,129 @@ function showCode() {
     var code = Blockly.JavaScript.workspaceToCode(workspace);
     alert(code);
 }
+
+function runCode() {
+    // Generate JavaScript code and run it.
+    window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP =
+        'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    try {
+        eval(code);
+    } catch (e) {
+        alert(e);
+    }
+}
+
+Blockly.Blocks['direction_block_top'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([["up","up"], ["down","down"]]), "direction")
+            .appendField("방향으로")
+            .appendField(new Blockly.FieldNumber(1, 1, 6), "distance")
+            .appendField("이동");
+        this.appendValueInput("NAME")
+            .setCheck("effect")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("효과");
+        this.setPreviousStatement(true, "direction_block_left");
+        this.setNextStatement(true, "direction_block_left");
+        this.setColour(195);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.JavaScript['direction_block_top'] = function(block) {
+    var direction = block.getFieldValue('direction');
+    var number_distance = block.getFieldValue('distance');
+    distance = number_distance * block_height_size;
+    var code ='';
+    if(direction === 'up') {
+        code = '.animate({top:"-='+distance+'"}, 1000)';
+    }else if(direction === 'down') {
+        code = '.animate({top:"+='+distance+'"}, 1000)';
+    }
+    return code;
+};
+
+Blockly.Blocks['direction_block_left'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([["right","right"], ["left","left"]]), "direction")
+            .appendField("방향으로")
+            .appendField(new Blockly.FieldNumber(1, 1, 12), "distance")
+            .appendField("이동");
+        this.appendValueInput("NAME")
+            .setCheck("effect")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("효과");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, ["direction_block_left", "direction_block_top"]);
+        this.setNextStatement(true, ["direction_block_left", "direction_block_top"]);
+        this.setColour(180);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.JavaScript['direction_block_left'] = function(block) {
+    var direction = block.getFieldValue('direction');
+    var number_distance = block.getFieldValue('distance');
+    distance = number_distance * block_width_size;
+    var code ='';
+    if(direction === 'left') {
+        code = '.animate({left:"-='+distance+'"}, 1000)';
+    }else if(direction === 'right') {
+        code = '.animate({left:"+='+distance+'"}, 1000)';
+    }
+    return code;
+};
+
+
+Blockly.Blocks['running_object'] = {
+    init: function() {
+        this.appendStatementInput("222")
+            .setCheck(["direction_block_left", "direction_block_top"])
+            .appendField(new Blockly.FieldDropdown([[{"src":"girl.png","width":50,"height":50,"alt":"cloud"},"girl"], [{"src":"cloud.png","width":50,"height":50,"alt":"cloud"},"cloud"]]), "running_object_pic");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.JavaScript['running_object'] = function(block) {
+    var dropdown_running_object_pic = block.getFieldValue('running_object_pic');
+    var statements_222 = Blockly.JavaScript.statementToCode(block, '222');
+    $running_object = dropdown_running_object_pic;
+    if(dropdown_running_object_pic == 'girl') {
+        $running_object = $('#girl');
+    }else if(dropdown_running_object_pic == 'girl') {
+        $running_object = $('#cloud');
+    }
+    var code = '$running_object'+statements_222;
+    return code;
+};
+
+Blockly.Blocks['effects'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([["답답이","easeInBounce"], ["팅팅볼","easeInOutBack"], ["머뭇머뭇","easeInOutBounce"]]), "easing");
+        this.setOutput(true, null);
+        this.setColour(330);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.JavaScript['effects'] = function(block) {
+    var dropdown_easing = block.getFieldValue('easing');
+    // TODO: Assemble JavaScript into code variable.
+    var code = '...';
+    // TODO: Change ORDER_NONE to the correct strength.
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
