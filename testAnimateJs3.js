@@ -48,26 +48,10 @@ var started_position = {
     y : 0
 };
 
-var written_text2 = '';
 var story = '0';
 var written_text = '';
-var programming = '';
-var programmed_line = [];
-var times_running = 0;
-var current_position_x = 0;
-var current_position_y = 0;
-var target_position_x = 0;
-var target_position_y = 0;
-var activity = '';
 var distance = 0;
-var move_block = 0;
 var cloud_position_y;
-var command = {
-    left    : ['left', '왼쪽', '좌'],
-    right   : ['right', '오른쪽', '우'],
-    up      : ['up', '위쪽', '위'],
-    down    : ['down', '아래쪽', '아래']
-}
 
 //todo 완료되면 저장하고 목록 불러오기 만들기
 var $running_object;
@@ -76,12 +60,9 @@ var $girl = $('#girl');
 var $cloud = $('#cloud');
 var $background_img = $('#background_img');
 var $run_button = $('#run_button');
-var $test_button = $('#test_button');
-var $save_button = $('#save_button');
+/*var $save_button = $('#save_button');*/
 var $refresh_button = $('#refresh_button');
 
-var li_selected;
-var li_input;
 var selected_easing;
 var selected_speed;
 
@@ -98,8 +79,11 @@ var background_size = {
 var block_width_size;
 var block_height_size;
 var running_object_top_fix = $('#table_head')[0].offsetHeight;
+var running_object_left_position;
+var running_object_top_position;
+var over_background_img_left;
+var over_background_img_top;
 
-var run_flag = false;
 //todo change image
 /*var d = new Date
 $('#imgg').attr("src", "/fish.png?"+d.getTime());*/
@@ -115,6 +99,7 @@ $(function(){
 
     $(window).resize(function(){
         set_position_resize();
+        // onresize();
     }).resize();
 
     $run_button.click(function(){
@@ -127,34 +112,22 @@ $(function(){
     });
 
     $running_object.draggable({ cursor: "move", containment: $container, scroll: false});
-    /*$cloud.draggable({ cursor: "move", containment: $container, scroll: false});*/
+
 
     $container.droppable({
         drop: function( event, ui ) {
             started_position.x = $running_object.offset().left;
             started_position.y = $running_object.offset().top - running_object_top_fix;
-            /*cloud_position_x = $cloud.offset().top;*/
         }
     });
-
-    $( "#sortable" ).sortable({
-        revert: true,
-        items: "li:not(.ui-state-disabled)"
-    });
-
-    $( ".draggable" ).draggable({
-        connectToSortable: "#sortable",
-        helper: "clone",
-        revert: "invalid"
-    });
-
-    $( "ul, li" ).disableSelection();
 
 });
 
 function set_init() {
-    $running_object.css({"left": started_position.x, "top": started_position.y });
+    $girl.css({"left": started_position.x, "top": started_position.y });
+    $cloud.css({"left": background_size.current_width*0.20, "top": background_size.current_height*0.20 });
 }
+
 function set_position_resize() {
     background_size.before_width = background_size.current_width;
     background_size.before_height = background_size.current_height;
@@ -168,7 +141,21 @@ function set_position_resize() {
     started_position.x = background_size.current_width*started_position.x/background_size.before_width;
     started_position.y = background_size.current_height*started_position.y/background_size.before_height;
     $running_object.css({"left": started_position.x, "top": started_position.y });
-    cloud_position_y = background_size.current_width*0.20;
+    /*cloud_position_y = background_size.current_width*0.20;*/
     $cloud.css({"left": background_size.current_width*0.20, "top": background_size.current_height*0.20 });
 }
 
+function check_running_object_position() {
+    running_object_left_position = $running_object.offset().left;
+    running_object_top_position = $running_object.offset().top - running_object_top_fix;
+
+    over_background_img_left = ($background_img.width() < running_object_left_position + $running_object.width()) || (running_object_left_position < 0);
+    over_background_img_top = ($background_img.height() < running_object_top_position + $running_object.height()) || (running_object_top_position < 0)
+
+    if(over_background_img_left || over_background_img_top) {
+        alert('이미지가 넘어갑니다.');
+        $running_object.stop(true,false);
+        $running_object.css({"left": started_position.x, "top": started_position.y });
+        $cloud.css({"left": background_size.current_width*0.20, "top": background_size.current_height*0.20 });
+    }
+}

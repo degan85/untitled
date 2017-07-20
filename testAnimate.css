@@ -1,15 +1,8 @@
 #container {
-    /*width: 1300px;
-    height: 866px;*/
+
     position: relative;
     background: yellow;
     border-radius: 8px;
-    /*background: url(bg2.jpg) repeat-x;*/
-    /*background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url("bg2.jpg");*/
-    /*width: 100%;
-    height: 866px;*/
 }
 #size{
     width: 400px;
@@ -21,8 +14,6 @@
 }
 #cloud {
     position: absolute !important;
-    top: 10px;
-    left: 260px;
 }
 
 .no_dropped li {
@@ -30,50 +21,15 @@
     background-color: aliceblue;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 10px;
-}
-
 #start {
     width: 100%;
     background-color: cadetblue;
 }
 
-li {
-    /*margin: 5px;
-    padding: 5px;*/
-    /* width: 100%; */
-    background-color: bisque;
-}
-
 input {
     width: 30%;
 }
-span.input-group-addon{
-    margin: 0;
-    padding: 0;
-}
-li.running_line {
-    background-color: limegreen;
-    border: 2px solid #aeb8de;
-}
-canvas
-{
-    background-color: #FFFFFF;
-    position: absolute;
-    z-index: -10;
-    /* control height and width in code to prevent stretching */
-}
-hr {
-    border-top: 3px ridge #8c8b8b;
-}
-ul.no_dropped
-{
-    border: 2px dashed #82deb5;
-}
+
 table td.table_button {
     padding: 10px;
 }
