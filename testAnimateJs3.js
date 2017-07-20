@@ -81,8 +81,8 @@ var block_height_size;
 var running_object_top_fix = $('#table_head')[0].offsetHeight;
 var running_object_left_position;
 var running_object_top_position;
-var over_background_img_left;
-var over_background_img_top;
+var is_background_img_left_over;
+var is_background_img_top_over;
 
 //todo change image
 /*var d = new Date
@@ -150,10 +150,10 @@ function check_running_object_position(object_running) {
     running_object_left_position = object_running.offset().left;
     running_object_top_position = object_running.offset().top - running_object_top_fix;
 
-    over_background_img_left = ($background_img.width() < running_object_left_position + object_running.width()) || (running_object_left_position < 0);
-    over_background_img_top = ($background_img.height() < running_object_top_position + object_running.height()) || (running_object_top_position < 0)
+    is_background_img_left_over = ($background_img.width() < running_object_left_position + object_running.width()) || (running_object_left_position < 0);
+    is_background_img_top_over = ($background_img.height() < running_object_top_position + object_running.height()) || (running_object_top_position < 0)
 
-    if(over_background_img_left || over_background_img_top) {
+    if(is_background_img_left_over || is_background_img_top_over) {
         alert('이미지가 넘어갑니다.');
         running_stop();
     }
