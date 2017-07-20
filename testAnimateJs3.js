@@ -165,3 +165,7 @@ function running_stop() {
 
     set_init();
 }
+
+function toRadians (angle) {
+    return angle * (Math.PI / 180);
+}
