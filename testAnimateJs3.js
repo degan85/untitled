@@ -145,17 +145,23 @@ function set_position_resize() {
     $cloud.css({"left": background_size.current_width*0.20, "top": background_size.current_height*0.20 });
 }
 
-function check_running_object_position() {
-    running_object_left_position = $running_object.offset().left;
-    running_object_top_position = $running_object.offset().top - running_object_top_fix;
+function check_running_object_position(object_running) {
 
-    over_background_img_left = ($background_img.width() < running_object_left_position + $running_object.width()) || (running_object_left_position < 0);
-    over_background_img_top = ($background_img.height() < running_object_top_position + $running_object.height()) || (running_object_top_position < 0)
+    running_object_left_position = object_running.offset().left;
+    running_object_top_position = object_running.offset().top - running_object_top_fix;
+
+    over_background_img_left = ($background_img.width() < running_object_left_position + object_running.width()) || (running_object_left_position < 0);
+    over_background_img_top = ($background_img.height() < running_object_top_position + object_running.height()) || (running_object_top_position < 0)
 
     if(over_background_img_left || over_background_img_top) {
         alert('이미지가 넘어갑니다.');
-        $running_object.stop(true,false);
-        $running_object.css({"left": started_position.x, "top": started_position.y });
-        $cloud.css({"left": background_size.current_width*0.20, "top": background_size.current_height*0.20 });
+        running_stop();
     }
+}
+
+function running_stop() {
+    $cloud.stop(true,false);
+    $girl.stop(true,false);
+
+    set_init();
 }

@@ -92,22 +92,24 @@ Blockly.JavaScript['direction_block_top'] = function(block) {
     var easing_function = Blockly.JavaScript.valueToCode(block, 'easing_function', Blockly.JavaScript.ORDER_NONE);
 
     distance = number_distance * block_height_size;
+
     var code ='';
+    var callback_fun = 'function(){check_running_object_position($'+block.getSurroundParent().getFieldValue("running_object_pic")+')})';
 
     if(easing_function === undefined || easing_function =='') {
         if(direction === 'up') {
-            code = '.animate({top:"-='+distance+'"}, 1000, check_running_object_position)';
+            code = '.animate({top:"-='+distance+'"}, 1000, ';
         }else if(direction === 'down') {
-            code = '.animate({top:"+='+distance+'"}, 1000, check_running_object_position)';
+            code = '.animate({top:"+='+distance+'"}, 1000, ';
         }
     }else {
         if(direction === 'up') {
-            code = '.animate({top:"-='+distance+'"}, 1000,"'+easing_function+'", check_running_object_position)';
+            code = '.animate({top:"-='+distance+'"}, 1000,"'+easing_function+'", ';
         }else if(direction === 'down') {
-            code = '.animate({top:"+='+distance+'"}, 1000,"'+easing_function+'", check_running_object_position)';
+            code = '.animate({top:"+='+distance+'"}, 1000,"'+easing_function+'", ';
         }
     }
-    return code;
+    return code + callback_fun+"\n";
 };
 
 Blockly.Blocks['direction_block_left'] = {
@@ -136,23 +138,25 @@ Blockly.JavaScript['direction_block_left'] = function(block) {
     var easing_function = Blockly.JavaScript.valueToCode(block, 'easing_function', Blockly.JavaScript.ORDER_NONE);
 
     distance = number_distance * block_width_size;
+
     var code ='';
+    var callback_fun = 'function(){check_running_object_position($'+block.getSurroundParent().getFieldValue("running_object_pic")+')})';
 
     if(easing_function === undefined || easing_function =='') {
         if(direction === 'left') {
-            code = '.animate({left:"-='+distance+'"}, 1000, check_running_object_position)';
+            code = '.animate({left:"-='+distance+'"}, 1000, ';
         }else if(direction === 'right') {
-            code = '.animate({left:"+='+distance+'"}, 1000, check_running_object_position)';
+            code = '.animate({left:"+='+distance+'"}, 1000, ';
         }
     }else {
         if(direction === 'left') {
-            code = '.animate({left:"-='+distance+'"}, 1000,"'+easing_function+'", check_running_object_position)';
+            code = '.animate({left:"-='+distance+'"}, 1000,"'+easing_function+'", ';
         }else if(direction === 'right') {
-            code = '.animate({left:"+='+distance+'"}, 1000,"'+easing_function+'", check_running_object_position)';
+            code = '.animate({left:"+='+distance+'"}, 1000,"'+easing_function+'", ';
         }
     }
 
-    return code;
+    return code + callback_fun+"\n";
 };
 
 
@@ -173,15 +177,9 @@ Blockly.Blocks['running_object'] = {
 Blockly.JavaScript['running_object'] = function(block) {
     var dropdown_running_object_pic = block.getFieldValue('running_object_pic');
     var move_statements = Blockly.JavaScript.statementToCode(block, 'running_blocks');
-    var $running_object2;
-    var code;
-    if(dropdown_running_object_pic === 'girl') {
-        code = '$girl' + move_statements;
-    }else if(dropdown_running_object_pic === 'cloud') {
-        code = '$cloud' + move_statements;
-    }
 
-    /*var code = '$running_object2'+move_statements;*/
+    var code = '$'+ dropdown_running_object_pic + move_statements;
+
     return code;
 };
 
